@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "73343564498",
+    "project_id": "surmeti-82bd5",
+    "storage_bucket": "surmeti-82bd5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:73343564498:android:78514398875bd49de3cb0b",
+        "android_client_info": {
+          "package_name": "com.example.surmeti"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKRSFk7Oxuwrb4DSY_h64yYpMcSq-t-eo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
