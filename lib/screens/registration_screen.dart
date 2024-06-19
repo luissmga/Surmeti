@@ -1,51 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'; // Agregado para inicializar Firebase
-import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; // Importar Firestore
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Firebase Demo',
+      home: RegistrationScreen(),
+    );
+  }
+}
 
 class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({super.key}); // Corregido el error
+  const RegistrationScreen({super.key});
 
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _firstNameController = TextEditingController();
-  final _lastNameController = TextEditingController();
-
-  late DatabaseReference _userRef; // Referencia a la base de datos de usuarios
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-    _initializeFirebase(); // Inicializar Firebase al iniciar el estado
-  }
-
-  Future<void> _initializeFirebase() async {
-    await Firebase.initializeApp();
-    FirebaseDatabase database = FirebaseDatabase.instance;
-    _userRef = FirebaseDatabase.instance.reference().child('users');
-  }
-
-  Future<void> _registerUser() async {
-    try {
-      await _userRef.push().set({
-        'firstName': _firstNameController.text,
-        'lastName': _lastNameController.text,
-        'username': _usernameController.text,
-        // Puedes querer cifrar o encriptar la contraseña antes de almacenarla
-        'password': _passwordController.text,
-      });
-      print('Usuario registrado exitosamente');
-      // Navegar a la página de inicio de sesión después de registrar al usuario
-      Navigator.pushReplacementNamed(context, '/login');
-    } catch (e) {
-      print('Error al registrar usuario: $e');
-      // Manejar el error, por ejemplo, mostrar un mensaje de error al usuario
-    }
+  void dispose() {
+    // Libera los controladores cuando el widget se destruye
+    usernameController.dispose();
+    passwordController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -57,11 +50,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
-          key: _formKey,
           child: Column(
             children: <Widget>[
               TextFormField(
-                controller: _firstNameController,
+                controller: firstNameController,
                 decoration: const InputDecoration(labelText: 'Nombre'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -71,7 +63,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 },
               ),
               TextFormField(
-                controller: _lastNameController,
+                controller: lastNameController,
                 decoration: const InputDecoration(labelText: 'Apellidos'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -81,7 +73,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 },
               ),
               TextFormField(
-                controller: _usernameController,
+                controller: usernameController,
                 decoration: const InputDecoration(labelText: 'Usuario'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -91,7 +83,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 },
               ),
               TextFormField(
-                controller: _passwordController,
+                controller: passwordController,
                 decoration: const InputDecoration(labelText: 'Contraseña'),
                 obscureText: true,
                 validator: (value) {
@@ -103,10 +95,23 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    // Registrar usuario
-                    _registerUser();
+                onPressed: () async {
+                  CollectionReference collRef = FirebaseFirestore.instance.collection("users");
+                  try {
+                    await collRef.add({
+                      'firstName': firstNameController.text,
+                      'lastName': lastNameController.text,
+                      'username': usernameController.text,
+                      // Puedes querer cifrar o encriptar la contraseña antes de almacenarla
+                      'password': passwordController.text,
+                    });
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Usuario registrado exitosamente'))
+                    );
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Error al registrar usuario: $e'))
+                    );
                   }
                 },
                 child: const Text('Registrarme'),

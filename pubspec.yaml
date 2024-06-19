@@ -23,7 +23,6 @@ dependencies:
   flutter_local_notifications: ^9.0.0
   uuid: ^3.0.6 #logica para selección en PC y Laptop, Sí o NO y en ID automatico
   cloud_firestore: ^4.0.1
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
