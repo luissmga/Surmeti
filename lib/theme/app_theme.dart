@@ -39,11 +39,21 @@ class AppTheme {
       ),
     );
   }
+
   static ThemeData get lightTheme {
     return ThemeData(
       primarySwatch: Colors.blue,
       visualDensity: VisualDensity.adaptivePlatformDensity,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white, 
+          backgroundColor: Colors.black, // Color del texto del botón
+        ),
+      ),
+      dividerTheme: const DividerThemeData(
+        color: Colors.purple,
+        thickness: 1,
+      ),
     );
   }
 }
-

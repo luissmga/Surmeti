@@ -6,7 +6,10 @@ import 'screens/splash_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/registration_screen.dart';
 import 'screens/welcome_screen.dart';
-
+import 'screens/ver_equipos_screen.dart';
+import 'screens/agregar_alerta_screen.dart';
+import 'screens/realizar_mantenimiento_screen.dart';
+import 'screens/realizar_validacion_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +34,10 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginScreen(),
         '/register': (context) => RegistrationScreen(),
         '/welcome': (context) => const WelcomeScreen(),
+        '/ver_equipos': (context) => const VerEquiposScreen(),
+        '/agregar_alerta': (context) => AgregarAlertaScreen(),
+        '/realizar_mantenimiento': (context) => RealizarMantenimientoScreen(),
+        '/realizar_validacion': (context) => RealizarValidacionScreen(),
       },
     );
   }

@@ -1,28 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'agregar_alerta_screen.dart';
 import 'realizar_mantenimiento_screen.dart';
 import 'realizar_validacion_screen.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Ver Equipos',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: VerEquiposScreen(),
-    );
-  }
-}
 
 class VerEquiposScreen extends StatelessWidget {
   const VerEquiposScreen({Key? key}) : super(key: key);
@@ -45,19 +25,27 @@ class VerEquiposScreen extends StatelessWidget {
           }
           return ListView(
             children: snapshot.data!.docs.map((doc) {
-              return ListTile(
-                title: Text('${doc.id} - ${doc['area']}'),
-                trailing: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetallesEquipoScreen(doc: doc),
-                      ),
-                    );
-                  },
-                  child: const Text('Ver'),
-                ),
+              return Column(
+                children: [
+                  ListTile(
+                    title: Text('${doc.id} - ${doc['area']}'),
+                    trailing: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetallesEquipoScreen(doc: doc),
+                          ),
+                        );
+                      },
+                      child: const Text('Ver'),
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.purple,
+                    thickness: 1,
+                  ),
+                ],
               );
             }).toList(),
           );
@@ -85,7 +73,7 @@ class DetallesEquipoScreen extends StatelessWidget {
           children: [
             Text('ID: ${doc.id}', style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 8),
-            Text('Área: ${data['área']}', style: Theme.of(context).textTheme.bodyMedium),
+            Text('Área: ${data['area']}', style: Theme.of(context).textTheme.bodyMedium),
             const SizedBox(height: 16),
             ...data.entries.map((entry) {
               return Text('${entry.key}: ${entry.value}');
@@ -93,28 +81,19 @@ class DetallesEquipoScreen extends StatelessWidget {
             const Spacer(),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AgregarAlertaScreen()),
-                );
+                Navigator.pushNamed(context, '/agregar_alerta');
               },
               child: const Text('Agregar Alerta'),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => RealizarMantenimientoScreen()),
-                );
+                Navigator.pushNamed(context, '/realizar_mantenimiento');
               },
               child: const Text('Realizar Mantenimiento'),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => RealizarValidacionScreen()),
-                );
+                Navigator.pushNamed(context, '/realizar_validacion');
               },
               child: const Text('Realizar Validación'),
             ),
