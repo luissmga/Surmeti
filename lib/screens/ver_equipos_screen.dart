@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:surmeti/screens/agregar_screen.dart';
+import 'agregar_alerta_screen.dart';
+import 'realizar_mantenimiento_screen.dart';
+import 'realizar_validacion_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const VerEquiposScreen(),
+      home: VerEquiposScreen(),
     );
   }
 }
@@ -72,7 +74,7 @@ class DetallesEquipoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final data = doc.data() as Map<String, dynamic>? ?? {};
+    final Map<String, dynamic> data = doc.data() as Map<String, dynamic>? ?? {};
 
     return Scaffold(
       appBar: AppBar(title: const Text('Detalles del equipo')),
@@ -83,7 +85,7 @@ class DetallesEquipoScreen extends StatelessWidget {
           children: [
             Text('ID: ${doc.id}', style: Theme.of(context).textTheme.bodyLarge),
             const SizedBox(height: 8),
-            Text('area: ${data['area']}', style: Theme.of(context).textTheme.bodyMedium),
+            Text('Área: ${data['área']}', style: Theme.of(context).textTheme.bodyMedium),
             const SizedBox(height: 16),
             ...data.entries.map((entry) {
               return Text('${entry.key}: ${entry.value}');
@@ -91,17 +93,15 @@ class DetallesEquipoScreen extends StatelessWidget {
             const Spacer(),
             ElevatedButton(
               onPressed: () {
-                // Navegar a la página de agregar alerta
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const AgregarScreen()),
+                  MaterialPageRoute(builder: (context) => AgregarAlertaScreen()),
                 );
               },
               child: const Text('Agregar Alerta'),
             ),
             ElevatedButton(
               onPressed: () {
-                // Navegar a la página de realizar mantenimiento
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => RealizarMantenimientoScreen()),
@@ -111,7 +111,6 @@ class DetallesEquipoScreen extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                // Navegar a la página de realizar validación
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => RealizarValidacionScreen()),
@@ -122,36 +121,6 @@ class DetallesEquipoScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class constAgregarAlertaScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Agregar Alerta')),
-      body: const Center(child: Text('Página de Agregar Alerta')),
-    );
-  }
-}
-
-class RealizarMantenimientoScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Realizar Mantenimiento')),
-      body: const Center(child: Text('Página de Realizar Mantenimiento')),
-    );
-  }
-}
-
-class RealizarValidacionScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Realizar Validación')),
-      body: const Center(child: Text('Página de Realizar Validación')),
     );
   }
 }

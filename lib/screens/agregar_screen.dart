@@ -163,7 +163,7 @@ class _AgregarScreenState extends State<AgregarScreen> {
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: areaController,
-                decoration: const InputDecoration(labelText: 'Área'),
+                decoration: const InputDecoration(labelText: 'area'),
               ),
               const SizedBox(height: 16.0),
               TextFormField(
