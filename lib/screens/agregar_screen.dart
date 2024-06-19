@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
 import 'ver_equipos_screen.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      // title: 'Flutter Firebase Demo',
+      home: AgregarScreen(),
+    );
+  }
+}
 
 class AgregarScreen extends StatefulWidget {
   const AgregarScreen({super.key});
@@ -16,22 +33,22 @@ class _AgregarScreenState extends State<AgregarScreen> {
   String _tipoEquipo = 'PC';
   String _monitorExtra = 'No';
   String _idAutomatico = '';
-  final DatabaseReference _databaseReference = FirebaseDatabase.instance.ref().child('equipos');
+  final CollectionReference _equiposCollection = FirebaseFirestore.instance.collection('equipos');
 
   // Controladores para los campos del formulario
-  final TextEditingController _areaController = TextEditingController();
-  final TextEditingController _responsableController = TextEditingController();
-  final TextEditingController _nombreEquipoController = TextEditingController();
-  final TextEditingController _memoriaSSDController = TextEditingController();
-  final TextEditingController _memoriaHDDController = TextEditingController();
-  final TextEditingController _ramController = TextEditingController();
-  final TextEditingController _marcaMonitorController = TextEditingController();
-  final TextEditingController _marcaGabineteController = TextEditingController();
-  final TextEditingController _marcaTecladoController = TextEditingController();
-  final TextEditingController _marcaMouseController = TextEditingController();
-  final TextEditingController _marcaMonitorExtraController = TextEditingController();
-  final TextEditingController _tipoConexionController = TextEditingController();
-  final TextEditingController _impresoraPredeterminadaController = TextEditingController();
+  final TextEditingController areaController = TextEditingController();
+  final TextEditingController responsableController = TextEditingController();
+  final TextEditingController nombreEquipoController = TextEditingController();
+  final TextEditingController memoriaSSDController = TextEditingController();
+  final TextEditingController memoriaHDDController = TextEditingController();
+  final TextEditingController ramController = TextEditingController();
+  final TextEditingController marcaMonitorController = TextEditingController();
+  final TextEditingController marcaGabineteController = TextEditingController();
+  final TextEditingController marcaTecladoController = TextEditingController();
+  final TextEditingController marcaMouseController = TextEditingController();
+  final TextEditingController marcaMonitorExtraController = TextEditingController();
+  final TextEditingController tipoConexionController = TextEditingController();
+  final TextEditingController impresoraPredeterminadaController = TextEditingController();
 
   @override
   void initState() {
@@ -42,19 +59,19 @@ class _AgregarScreenState extends State<AgregarScreen> {
   @override
   void dispose() {
     // Liberar controladores cuando no se necesiten
-    _areaController.dispose();
-    _responsableController.dispose();
-    _nombreEquipoController.dispose();
-    _memoriaSSDController.dispose();
-    _memoriaHDDController.dispose();
-    _ramController.dispose();
-    _marcaMonitorController.dispose();
-    _marcaGabineteController.dispose();
-    _marcaTecladoController.dispose();
-    _marcaMouseController.dispose();
-    _marcaMonitorExtraController.dispose();
-    _tipoConexionController.dispose();
-    _impresoraPredeterminadaController.dispose();
+    areaController.dispose();
+    responsableController.dispose();
+    nombreEquipoController.dispose();
+    memoriaSSDController.dispose();
+    memoriaHDDController.dispose();
+    ramController.dispose();
+    marcaMonitorController.dispose();
+    marcaGabineteController.dispose();
+    marcaTecladoController.dispose();
+    marcaMouseController.dispose();
+    marcaMonitorExtraController.dispose();
+    tipoConexionController.dispose();
+    impresoraPredeterminadaController.dispose();
     super.dispose();
   }
 
@@ -62,53 +79,58 @@ class _AgregarScreenState extends State<AgregarScreen> {
     // Crear un mapa con los datos del formulario
     final equipoData = {
       'tipoEquipo': _tipoEquipo,
-      'area': _areaController.text,
-      'responsable': _responsableController.text,
-      'nombreEquipo': _nombreEquipoController.text,
-      'memoriaSSD': _memoriaSSDController.text,
-      'memoriaHDD': _memoriaHDDController.text,
-      'ram': _ramController.text,
-      'marcaTeclado': _marcaTecladoController.text,
-      'marcaMouse': _marcaMouseController.text,
+      'area': areaController.text,
+      'responsable': responsableController.text,
+      'nombreEquipo': nombreEquipoController.text,
+      'memoriaSSD': memoriaSSDController.text,
+      'memoriaHDD': memoriaHDDController.text,
+      'ram': ramController.text,
+      'marcaTeclado': marcaTecladoController.text,
+      'marcaMouse': marcaMouseController.text,
       'monitorExtra': _monitorExtra,
-      'tipoConexion': _tipoConexionController.text,
-      'impresoraPredeterminada': _impresoraPredeterminadaController.text,
+      'tipoConexion': tipoConexionController.text,
+      'impresoraPredeterminada': impresoraPredeterminadaController.text,
       'idAutomatico': _idAutomatico,
     };
 
     if (_tipoEquipo == 'PC') {
-      equipoData['marcaMonitor'] = _marcaMonitorController.text;
-      equipoData['marcaGabinete'] = _marcaGabineteController.text;
+      equipoData['marcaMonitor'] = marcaMonitorController.text;
+      equipoData['marcaGabinete'] = marcaGabineteController.text;
     }
 
     if (_monitorExtra == 'Sí') {
-      equipoData['marcaMonitorExtra'] = _marcaMonitorExtraController.text;
+      equipoData['marcaMonitorExtra'] = marcaMonitorExtraController.text;
     }
 
-    // Guardar los datos en Firebase Realtime Database
-    await _databaseReference.push().set(equipoData);
-
-    // Mostrar el mensaje de confirmación y redirigir a "Ver Equipos"
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: const Text('Se guardó correctamente'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Cierra el diálogo
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const VerEquiposScreen()),
-                ); // Navega a la página de Ver Equipos
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
+    // Guardar los datos en Firebase Firestore
+    try {
+      await _equiposCollection.add(equipoData);
+      // Mostrar el mensaje de confirmación y redirigir a "Ver Equipos"
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: const Text('Se guardó correctamente'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Cierra el diálogo
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const VerEquiposScreen()),
+                  ); // Navega a la página de Ver Equipos
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al guardar el equipo: $e')),
+      );
+    }
   }
 
   @override
@@ -140,54 +162,54 @@ class _AgregarScreenState extends State<AgregarScreen> {
               ),
               const SizedBox(height: 16.0),
               TextFormField(
-                controller: _areaController,
+                controller: areaController,
                 decoration: const InputDecoration(labelText: 'Área'),
               ),
               const SizedBox(height: 16.0),
               TextFormField(
-                controller: _responsableController,
+                controller: responsableController,
                 decoration: const InputDecoration(labelText: 'Responsable del equipo'),
               ),
               const SizedBox(height: 16.0),
               TextFormField(
-                controller: _nombreEquipoController,
+                controller: nombreEquipoController,
                 decoration: const InputDecoration(labelText: 'Nombre del equipo'),
               ),
               const SizedBox(height: 16.0),
               TextFormField(
-                controller: _memoriaSSDController,
+                controller: memoriaSSDController,
                 decoration: const InputDecoration(labelText: 'Memoria SSD'),
               ),
               const SizedBox(height: 16.0),
               TextFormField(
-                controller: _memoriaHDDController,
+                controller: memoriaHDDController,
                 decoration: const InputDecoration(labelText: 'Memoria HDD'),
               ),
               const SizedBox(height: 16.0),
               TextFormField(
-                controller: _ramController,
+                controller: ramController,
                 decoration: const InputDecoration(labelText: 'RAM'),
               ),
               if (_tipoEquipo == 'PC') ...[
                 const SizedBox(height: 16.0),
                 TextFormField(
-                  controller: _marcaMonitorController,
+                  controller: marcaMonitorController,
                   decoration: const InputDecoration(labelText: 'Marca del monitor'),
                 ),
                 const SizedBox(height: 16.0),
                 TextFormField(
-                  controller: _marcaGabineteController,
+                  controller: marcaGabineteController,
                   decoration: const InputDecoration(labelText: 'Marca del gabinete'),
                 ),
               ],
               const SizedBox(height: 16.0),
               TextFormField(
-                controller: _marcaTecladoController,
+                controller: marcaTecladoController,
                 decoration: const InputDecoration(labelText: 'Marca del teclado'),
               ),
               const SizedBox(height: 16.0),
               TextFormField(
-                controller: _marcaMouseController,
+                controller: marcaMouseController,
                 decoration: const InputDecoration(labelText: 'Marca del mouse'),
               ),
               const SizedBox(height: 16.0),
@@ -209,39 +231,39 @@ class _AgregarScreenState extends State<AgregarScreen> {
               if (_monitorExtra == 'Sí') ...[
                 const SizedBox(height: 16.0),
                 TextFormField(
-                  controller: _marcaMonitorExtraController,
+                  controller: marcaMonitorExtraController,
                   decoration: const InputDecoration(labelText: 'Marca del monitor extra'),
                 ),
               ],
               const SizedBox(height: 16.0),
               TextFormField(
-                controller: _tipoConexionController,
+                controller: tipoConexionController,
                 decoration: const InputDecoration(labelText: 'Tipo de conexión'),
               ),
               const SizedBox(height: 16.0),
-                               TextFormField(
-                   controller: _impresoraPredeterminadaController,
-                   decoration: const InputDecoration(labelText: 'Impresora Predeterminada'),
-                 ),
-                 const SizedBox(height: 16.0),
-                 TextFormField(
-                   decoration: const InputDecoration(labelText: 'ID Automático'),
-                   initialValue: _idAutomatico,
-                   readOnly: true,
-                 ),
-                 const SizedBox(height: 32.0),
-                 ElevatedButton(
-                   onPressed: () {
-                     if (_formKey.currentState!.validate()) {
-                       _guardarEquipo(); // Llamar a la función para guardar los datos
-                     }
-                   },
-                   child: const Text('Guardar'),
-                 ),
-               ],
-             ),
-           ),
-         ),
-       );
-     }
-   }
+              TextFormField(
+                controller: impresoraPredeterminadaController,
+                decoration: const InputDecoration(labelText: 'Impresora Predeterminada'),
+              ),
+              const SizedBox(height: 16.0),
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'ID Automático'),
+                initialValue: _idAutomatico,
+                readOnly: true,
+              ),
+              const SizedBox(height: 32.0),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    _guardarEquipo(); // Llamar a la función para guardar los datos
+                  }
+                },
+                child: const Text('Guardar'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
