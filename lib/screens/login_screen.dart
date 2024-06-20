@@ -83,21 +83,42 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center, // Centrar el contenido horizontalmente
           children: <Widget>[
-            TextField(
-              controller: usernameController,
-              decoration: const InputDecoration(labelText: 'Usuario'),
+            // Campo de entrada para Usuario
+            Container(
+              alignment: Alignment.center,
+              child: TextField(
+                controller: usernameController,
+                decoration: InputDecoration(
+                  labelText: 'Usuario',
+                  labelStyle: TextStyle(color: Colors.purple), // Cambiar el color del texto del label
+                ),
+              ),
             ),
-            TextField(
-              controller: passwordController,
-              decoration: const InputDecoration(labelText: 'Contraseña'),
-              obscureText: true,
+            const SizedBox(height: 12), // Espacio entre los campos
+
+            // Campo de entrada para Contraseña
+            Container(
+              alignment: Alignment.center,
+              child: TextField(
+                controller: passwordController,
+                decoration: InputDecoration(
+                  labelText: 'Contraseña',
+                  labelStyle: TextStyle(color: Colors.purple), // Cambiar el color del texto del label
+                ),
+                obscureText: true,
+              ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 20), // Espacio entre los campos y el botón
+
+            // Botón de Iniciar sesión
             ElevatedButton(
               onPressed: _login,
               child: const Text('Iniciar'),
             ),
+
+            // Botón para Registrar
             TextButton(
               onPressed: () {
                 Navigator.of(context).pushNamed('/register');
