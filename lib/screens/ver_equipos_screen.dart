@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:surmeti/theme/app_theme.dart';
 import 'agregar_alerta_screen.dart';
 import 'realizar_mantenimiento_screen.dart';
 import 'realizar_validacion_screen.dart';
@@ -41,7 +42,7 @@ class VerEquiposScreen extends StatelessWidget {
                       child: const Text('Ver'),
                     ),
                   ),
-                  Divider(
+                  const Divider(
                     color: Colors.purple,
                     thickness: 1,
                   ),
@@ -59,6 +60,31 @@ class DetallesEquipoScreen extends StatelessWidget {
   final DocumentSnapshot doc;
 
   const DetallesEquipoScreen({Key? key, required this.doc}) : super(key: key);
+  static Widget buildBox(BuildContext context, String title, Widget screen) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => screen),
+        );
+      },
+      child: Container(
+        width: 130,
+        height: 90,
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(9),
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 0, 0, 0),
+          borderRadius: BorderRadius.circular(80),
+        ),
+        child: Text(
+          title,
+          textAlign: TextAlign.center,
+          style: AppTheme.boxTextStyle,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +92,8 @@ class DetallesEquipoScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Detalles del equipo')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: Center(
+        // padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -79,24 +105,24 @@ class DetallesEquipoScreen extends StatelessWidget {
               return Text('${entry.key}: ${entry.value}');
             }).toList(),
             const Spacer(),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/agregar_alerta');
-              },
-              child: const Text('Agregar Alerta'),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                buildBox(context, 'Agregar alerta',  AgregarAlertaScreen()),
+                buildBox(context, 'Realizar mantenimiento',  RealizarMantenimientoScreen()),
+              ],
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/realizar_mantenimiento');
-              },
-              child: const Text('Realizar Mantenimiento'),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                // buildBox(context, 'Agregar alerta',  AgregarAlertaScreen()),
+                // buildBox(context, 'Realizar mantenimiento',  RealizarMantenimientoScreen()),
+                buildBox(context, 'Realizar mantenimiento',  RealizarValidacionScreen()),
+              ],
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/realizar_validacion');
-              },
-              child: const Text('Realizar Validación'),
-            ),
+            const SizedBox(height: 30),
           ],
         ),
       ),
