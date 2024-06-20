@@ -20,7 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
   local_auth: ^2.1.0
-  flutter_local_notifications: ^9.0.0
+  # flutter_local_notifications: ^9.0.0
   uuid: ^3.0.6 #logica para selección en PC y Laptop, Sí o NO y en ID automatico
   cloud_firestore: ^4.0.1
   # The following adds the Cupertino Icons font to your application.
@@ -28,6 +28,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   firebase_core: ^2.32.0
   firebase_database: ^10.0.0
+  firebase_auth: ^4.20.0
+  flutter_local_notifications: ^17.1.2
 
 dev_dependencies:
   flutter_test:

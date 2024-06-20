@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:surmeti/screens/notificaciones_screen.dart';
 import '../theme/app_theme.dart';
 import 'agregar_screen.dart';
 import 'editar_screen.dart';
@@ -85,6 +86,7 @@ class WelcomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
+                buildBox(context, 'Notificaciones', const NotificacionesScreen()),
                 buildBox(context, 'Ayuda', const AyudaScreen()),
               ],
             ),

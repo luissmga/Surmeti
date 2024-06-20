@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:local_auth/local_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:surmeti/theme/app_theme.dart';
 
@@ -12,11 +12,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final LocalAuthentication auth = LocalAuthentication();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
   void initState() {
@@ -29,19 +30,44 @@ class _LoginScreenState extends State<LoginScreen> {
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
 
-  // Future<void> _authenticate() async {
-  //   bool authenticated = false;
-  //   try {
-  //     authenticated = await auth.authenticate(
-  //         localizedReason: 'Scan your fingerprint to authenticate',
-  //         options: const AuthenticationOptions(biometricOnly: true));
-  //   } on PlatformException catch (e) {
-  //     print(e);
-  //   }
-  //   if (authenticated) {
-  //     Navigator.of(context).pushReplacementNamed('/welcome');
-  //   }
-  // }
+  Future<void> _login() async {
+    String username = usernameController.text;
+    String password = passwordController.text;
+
+    try {
+      QuerySnapshot userSnapshot = await _firestore
+          .collection('users')
+          .where('username', isEqualTo: username)
+          .where('password', isEqualTo: password)
+          .get();
+
+      if (userSnapshot.docs.isNotEmpty) {
+        Navigator.of(context).pushReplacementNamed('/welcome');
+      } else {
+        _showErrorDialog('Usuario o contraseña incorrectos');
+      }
+    } catch (e) {
+      _showErrorDialog('Error al iniciar sesión: $e');
+    }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Error'),
+        content: Text(message),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+            child: const Text('Aceptar'),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,26 +85,19 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           children: <Widget>[
             TextField(
-              controller: _usernameController,
+              controller: usernameController,
               decoration: const InputDecoration(labelText: 'Usuario'),
             ),
             TextField(
-              controller: _passwordController,
+              controller: passwordController,
               decoration: const InputDecoration(labelText: 'Contraseña'),
               obscureText: true,
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                // Add login logic here
-                Navigator.of(context).pushReplacementNamed('/welcome');
-              },
+              onPressed: _login,
               child: const Text('Iniciar'),
             ),
-            // ElevatedButton(
-            //   onPressed: _authenticate,
-            //   child: Text('Use Fingerprint'),
-            // ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pushNamed('/register');
