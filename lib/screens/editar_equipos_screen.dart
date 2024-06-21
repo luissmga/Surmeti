@@ -1,64 +1,92 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:uuid/uuid.dart';
-import 'ver_equipos_screen.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp(MyApp());
-}
+class EditarEquipoScreen extends StatefulWidget {
+  final String docId;
+  final Map<String, dynamic> data;
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      // title: 'Flutter Firebase Demo',
-      home: AgregarScreen(),
-    );
-  }
-}
-
-class AgregarScreen extends StatefulWidget {
-  const AgregarScreen({super.key});
+  const EditarEquipoScreen({super.key, required this.docId, required this.data});
 
   @override
-  _AgregarScreenState createState() => _AgregarScreenState();
+  _EditarEquipoScreenState createState() => _EditarEquipoScreenState();
 }
 
-class _AgregarScreenState extends State<AgregarScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final _uuid = const Uuid(); // Instancia para generar UUID
+class _EditarEquipoScreenState extends State<EditarEquipoScreen> {
+  late TextEditingController areaController;
+  late TextEditingController responsableController;
+  late TextEditingController nombreEquipoController;
+  late TextEditingController memoriaSSDController;
+  late TextEditingController memoriaHDDController;
+  late TextEditingController ramController;
+  late TextEditingController marcaMonitorController;
+  late TextEditingController marcaGabineteController;
+  late TextEditingController marcaTecladoController;
+  late TextEditingController marcaMouseController;
+  late TextEditingController marcaMonitorExtraController;
+  late TextEditingController tipoConexionController;
+  late TextEditingController impresoraPredeterminadaController;
+
   String _tipoEquipo = 'PC';
   String _monitorExtra = 'No';
-  String _idAutomatico = '';
-  final CollectionReference _equiposCollection = FirebaseFirestore.instance.collection('equipos');
-
-  // Controladores para los campos del formulario
-  final TextEditingController areaController = TextEditingController();
-  final TextEditingController responsableController = TextEditingController();
-  final TextEditingController nombreEquipoController = TextEditingController();
-  final TextEditingController memoriaSSDController = TextEditingController();
-  final TextEditingController memoriaHDDController = TextEditingController();
-  final TextEditingController ramController = TextEditingController();
-  final TextEditingController marcaMonitorController = TextEditingController();
-  final TextEditingController marcaGabineteController = TextEditingController();
-  final TextEditingController marcaTecladoController = TextEditingController();
-  final TextEditingController marcaMouseController = TextEditingController();
-  final TextEditingController marcaMonitorExtraController = TextEditingController();
-  final TextEditingController tipoConexionController = TextEditingController();
-  final TextEditingController impresoraPredeterminadaController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _idAutomatico = _uuid.v4(); // Generar ID automático al iniciar la página
+
+    areaController = TextEditingController(text: widget.data['area']);
+    responsableController = TextEditingController(text: widget.data['responsable']);
+    nombreEquipoController = TextEditingController(text: widget.data['nombreEquipo']);
+    memoriaSSDController = TextEditingController(text: widget.data['memoriaSSD']);
+    memoriaHDDController = TextEditingController(text: widget.data['memoriaHDD']);
+    ramController = TextEditingController(text: widget.data['ram']);
+    marcaMonitorController = TextEditingController(text: widget.data['marcaMonitor']);
+    marcaGabineteController = TextEditingController(text: widget.data['marcaGabinete']);
+    marcaTecladoController = TextEditingController(text: widget.data['marcaTeclado']);
+    marcaMouseController = TextEditingController(text: widget.data['marcaMouse']);
+    marcaMonitorExtraController = TextEditingController(text: widget.data['marcaMonitorExtra']);
+    tipoConexionController = TextEditingController(text: widget.data['tipoConexion']);
+    impresoraPredeterminadaController = TextEditingController(text: widget.data['impresoraPredeterminada']);
+
+    _tipoEquipo = widget.data['tipoEquipo'] ?? 'PC';
+    _monitorExtra = widget.data['monitorExtra'] ?? 'No';
+  }
+
+  Future<void> _updateEquipo() async {
+    final equipoData = {
+      'tipoEquipo': _tipoEquipo,
+      'area': areaController.text,
+      'responsable': responsableController.text,
+      'nombreEquipo': nombreEquipoController.text,
+      'memoriaSSD': memoriaSSDController.text,
+      'memoriaHDD': memoriaHDDController.text,
+      'ram': ramController.text,
+      'marcaTeclado': marcaTecladoController.text,
+      'marcaMouse': marcaMouseController.text,
+      'monitorExtra': _monitorExtra,
+      'tipoConexion': tipoConexionController.text,
+      'impresoraPredeterminada': impresoraPredeterminadaController.text,
+    };
+
+    if (_tipoEquipo == 'PC') {
+      equipoData['marcaMonitor'] = marcaMonitorController.text;
+      equipoData['marcaGabinete'] = marcaGabineteController.text;
+    }
+
+    if (_monitorExtra == 'Sí') {
+      equipoData['marcaMonitorExtra'] = marcaMonitorExtraController.text;
+    }
+
+    await FirebaseFirestore.instance.collection('equipos').doc(widget.docId).update(equipoData);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Equipo actualizado exitosamente')),
+    );
+
+    Navigator.of(context).pop();
   }
 
   @override
   void dispose() {
-    // Liberar controladores cuando no se necesiten
     areaController.dispose();
     responsableController.dispose();
     nombreEquipoController.dispose();
@@ -75,74 +103,13 @@ class _AgregarScreenState extends State<AgregarScreen> {
     super.dispose();
   }
 
-  Future<void> _guardarEquipo() async {
-    // Crear un mapa con los datos del formulario
-    final equipoData = {
-      'tipoEquipo': _tipoEquipo,
-      'area': areaController.text,
-      'responsable': responsableController.text,
-      'nombreEquipo': nombreEquipoController.text,
-      'memoriaSSD': memoriaSSDController.text,
-      'memoriaHDD': memoriaHDDController.text,
-      'ram': ramController.text,
-      'marcaTeclado': marcaTecladoController.text,
-      'marcaMouse': marcaMouseController.text,
-      'monitorExtra': _monitorExtra,
-      'tipoConexion': tipoConexionController.text,
-      'impresoraPredeterminada': impresoraPredeterminadaController.text,
-      'idAutomatico': _idAutomatico,
-    };
-
-    if (_tipoEquipo == 'PC') {
-      equipoData['marcaMonitor'] = marcaMonitorController.text;
-      equipoData['marcaGabinete'] = marcaGabineteController.text;
-    }
-
-    if (_monitorExtra == 'Sí') {
-      equipoData['marcaMonitorExtra'] = marcaMonitorExtraController.text;
-    }
-
-    // Guardar los datos en Firebase Firestore
-    try {
-      await _equiposCollection.add(equipoData);
-      // Mostrar el mensaje de confirmación y redirigir a "Ver Equipos"
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            content: const Text('Se guardó correctamente'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Cierra el diálogo
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const VerEquiposScreen()),
-                  ); // Navega a la página de Ver Equipos
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error al guardar el equipo: $e')),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Agregar Equipo'),
-      ),
+      appBar: AppBar(title: const Text('Editar Equipo')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
-          key: _formKey,
           child: ListView(
             children: <Widget>[
               DropdownButtonFormField<String>(
@@ -167,7 +134,7 @@ class _AgregarScreenState extends State<AgregarScreen> {
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: areaController,
-                decoration: const InputDecoration(labelText: 'area'),
+                decoration: const InputDecoration(labelText: 'Área'),
               ),
               const Divider(
                     color: Color.fromARGB(255, 75, 21, 85),
@@ -301,24 +268,12 @@ class _AgregarScreenState extends State<AgregarScreen> {
                     color: Color.fromARGB(255, 75, 21, 85),
                     thickness: 2,
                   ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'ID Automático'),
-                initialValue: _idAutomatico,
-                readOnly: true,
-              ),
-              const Divider(
-                    color: Color.fromARGB(255, 75, 21, 85),
-                    thickness: 2,
-                  ),
               const SizedBox(height: 32.0),
               ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _guardarEquipo(); // Llamar a la función para guardar los datos
-                  }
+                  _updateEquipo();
                 },
-                child: const Text('Guardar'),
+                child: const Text('Actualizar'),
               ),
             ],
           ),

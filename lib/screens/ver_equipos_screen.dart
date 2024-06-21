@@ -105,11 +105,11 @@ class DetallesEquipoScreen extends StatelessWidget {
               return Text('${entry.key}: ${entry.value}');
             }).toList(),
             const Spacer(),
-            const SizedBox(height: 20),
+            const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                buildBox(context, 'Agregar alerta',  AgregarAlertaScreen()),
+                buildBox(context, 'Agregar alerta',  const AgregarAlertaScreen()),
                 buildBox(context, 'Realizar mantenimiento',  RealizarMantenimientoScreen()),
               ],
             ),
@@ -119,7 +119,7 @@ class DetallesEquipoScreen extends StatelessWidget {
               children: <Widget>[
                 // buildBox(context, 'Agregar alerta',  AgregarAlertaScreen()),
                 // buildBox(context, 'Realizar mantenimiento',  RealizarMantenimientoScreen()),
-                buildBox(context, 'Realizar mantenimiento',  RealizarValidacionScreen()),
+                buildBox(context, 'Realizar validación',  RealizarValidacionScreen()),
               ],
             ),
             const SizedBox(height: 30),
