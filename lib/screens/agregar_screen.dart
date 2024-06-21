@@ -160,58 +160,102 @@ class _AgregarScreenState extends State<AgregarScreen> {
                   });
                 },
               ),
+              const Divider(
+                    color: Color.fromARGB(255, 75, 21, 85),
+                    thickness: 2,
+                  ),
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: areaController,
                 decoration: const InputDecoration(labelText: 'area'),
               ),
+              const Divider(
+                    color: Color.fromARGB(255, 75, 21, 85),
+                    thickness: 2,
+                  ),
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: responsableController,
                 decoration: const InputDecoration(labelText: 'Responsable del equipo'),
               ),
+              const Divider(
+                    color: Color.fromARGB(255, 75, 21, 85),
+                    thickness: 2,
+                  ),
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: nombreEquipoController,
                 decoration: const InputDecoration(labelText: 'Nombre del equipo'),
               ),
+              const Divider(
+                    color: Color.fromARGB(255, 75, 21, 85),
+                    thickness: 2,
+                  ),
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: memoriaSSDController,
                 decoration: const InputDecoration(labelText: 'Memoria SSD'),
               ),
+              const Divider(
+                    color: Color.fromARGB(255, 75, 21, 85),
+                    thickness: 2,
+                  ),
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: memoriaHDDController,
                 decoration: const InputDecoration(labelText: 'Memoria HDD'),
               ),
+              const Divider(
+                    color: Color.fromARGB(255, 75, 21, 85),
+                    thickness: 2,
+                  ),
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: ramController,
                 decoration: const InputDecoration(labelText: 'RAM'),
               ),
+              const Divider(
+                    color: Color.fromARGB(255, 75, 21, 85),
+                    thickness: 2,
+                  ),
               if (_tipoEquipo == 'PC') ...[
                 const SizedBox(height: 16.0),
                 TextFormField(
                   controller: marcaMonitorController,
                   decoration: const InputDecoration(labelText: 'Marca del monitor'),
                 ),
+                const Divider(
+                    color: Color.fromARGB(255, 75, 21, 85),
+                    thickness: 2,
+                  ),
                 const SizedBox(height: 16.0),
                 TextFormField(
                   controller: marcaGabineteController,
                   decoration: const InputDecoration(labelText: 'Marca del gabinete'),
                 ),
               ],
+              const Divider(
+                    color: Color.fromARGB(255, 75, 21, 85),
+                    thickness: 2,
+                  ),
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: marcaTecladoController,
                 decoration: const InputDecoration(labelText: 'Marca del teclado'),
               ),
+              const Divider(
+                    color: Color.fromARGB(255, 75, 21, 85),
+                    thickness: 2,
+                  ),
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: marcaMouseController,
                 decoration: const InputDecoration(labelText: 'Marca del mouse'),
               ),
+              const Divider(
+                    color: Color.fromARGB(255, 75, 21, 85),
+                    thickness: 2,
+                  ),
               const SizedBox(height: 16.0),
               DropdownButtonFormField<String>(
                 value: _monitorExtra,
@@ -235,22 +279,38 @@ class _AgregarScreenState extends State<AgregarScreen> {
                   decoration: const InputDecoration(labelText: 'Marca del monitor extra'),
                 ),
               ],
+              const Divider(
+                    color: Color.fromARGB(255, 75, 21, 85),
+                    thickness: 2,
+                  ),
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: tipoConexionController,
                 decoration: const InputDecoration(labelText: 'Tipo de conexión'),
               ),
+              const Divider(
+                    color: Color.fromARGB(255, 75, 21, 85),
+                    thickness: 2,
+                  ),
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: impresoraPredeterminadaController,
                 decoration: const InputDecoration(labelText: 'Impresora Predeterminada'),
               ),
+              const Divider(
+                    color: Color.fromARGB(255, 75, 21, 85),
+                    thickness: 2,
+                  ),
               const SizedBox(height: 16.0),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'ID Automático'),
                 initialValue: _idAutomatico,
                 readOnly: true,
               ),
+              const Divider(
+                    color: Color.fromARGB(255, 75, 21, 85),
+                    thickness: 2,
+                  ),
               const SizedBox(height: 32.0),
               ElevatedButton(
                 onPressed: () {

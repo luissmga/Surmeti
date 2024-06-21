@@ -114,17 +114,7 @@ class _AgregarAlertaScreenState extends State<AgregarAlertaScreen> {
     required String body,
     required DateTime scheduledDate,
   }) async {
-    const androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      'your_channel_id',
-      'your_channel_name',
-      // 'your_channel_description',
-      importance: Importance.max,
-      priority: Priority.high,
-    );
 
-    const platformChannelSpecifics = NotificationDetails(
-      android: androidPlatformChannelSpecifics,
-    );
 
     // await flutterLocalNotificationsPlugin.schedule(
     //   id,

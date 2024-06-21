@@ -83,16 +83,24 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center, // Centrar el contenido horizontalmente
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            const SizedBox(height: 5), // Espacio entre el AppBar y la imagen
+            // Imagen
+            Image.asset(
+              'assets/surmeti.png', // Ruta de la imagen
+              height: 200, // Ajusta el tamaño de la imagen según sea necesario
+            ),
+            const SizedBox(height: 20), // Espacio entre la imagen y los campos de texto
+
             // Campo de entrada para Usuario
             Container(
               alignment: Alignment.center,
               child: TextField(
                 controller: usernameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Usuario',
-                  labelStyle: TextStyle(color: Colors.purple), // Cambiar el color del texto del label
+                  labelStyle: TextStyle(color: Color.fromARGB(255, 74, 20, 84)),
                 ),
               ),
             ),
@@ -103,9 +111,9 @@ class _LoginScreenState extends State<LoginScreen> {
               alignment: Alignment.center,
               child: TextField(
                 controller: passwordController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Contraseña',
-                  labelStyle: TextStyle(color: Colors.purple), // Cambiar el color del texto del label
+                  labelStyle: TextStyle(color: Color.fromARGB(255, 74, 20, 84)),
                 ),
                 obscureText: true,
               ),
