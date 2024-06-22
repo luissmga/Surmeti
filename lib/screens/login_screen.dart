@@ -88,8 +88,8 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 5), // Espacio entre el AppBar y la imagen
             // Imagen
             Image.asset(
-              'assets/surmeti.png', // Ruta de la imagen
-              height: 200, // Ajusta el tamaño de la imagen según sea necesario
+              'assets/surmeti.png', // Ruta del logo
+              height: 200, // Ajuste del tamaño de la imagen
             ),
             const SizedBox(height: 20), // Espacio entre la imagen y los campos de texto
 
@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 12), // Espacio entre los campos
+            const SizedBox(height: 10), // Espacio entre los campos
 
             // Campo de entrada para Contraseña
             Container(
@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 obscureText: true,
               ),
             ),
-            const SizedBox(height: 20), // Espacio entre los campos y el botón
+            const SizedBox(height: 15), // Espacio entre los campos y el botón
 
             // Botón de Iniciar sesión
             ElevatedButton(
@@ -131,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {
                 Navigator.of(context).pushNamed('/register');
               },
-              child: const Text('Registrar'),
+              child: const Text('Registrarme'),
             ),
           ],
         ),

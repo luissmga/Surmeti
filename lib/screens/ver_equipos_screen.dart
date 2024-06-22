@@ -44,7 +44,7 @@ class VerEquiposScreen extends StatelessWidget {
                   ),
                   const Divider(
                     color: Colors.purple,
-                    thickness: 1,
+                    thickness: 2,
                   ),
                 ],
               );
