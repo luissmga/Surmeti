@@ -60,7 +60,7 @@ class _RegistroMantenimientoScreenState
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const ListTile(
                       title: Text('Cargando ID...'),
-                      subtitle: Text('Fecha de inicio: Cargando...'),
+                      subtitle: Text('Fecha de mantenimiento: Cargando...'),
                     );
                   } else if (snapshot.hasError) {
                     return ListTile(
@@ -142,7 +142,7 @@ class DetalleMantenimientoScreen extends StatelessWidget {
             Text(
                 'Quitar programas que se ejecutan al inicio:        ${mantenimiento['quitarprograminicio']}'),
             Text(
-                'Quitar los servicios que se ejecutan al inicio:     ${mantenimiento['quitarservicio']}'),
+                'Quitar los servicios que se ejecutan al inicio:     ${mantenimiento['quitarservinicio']}'),
             Text(
                 'Escanear pc con antivirus:                                    ${mantenimiento['escanearantivirus']}'),
             Text(

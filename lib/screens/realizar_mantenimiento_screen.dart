@@ -82,7 +82,7 @@ class RealizarMantenimientoScreenState
 
     if (!firmaAUValida) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Firma AU no válida.')),
+        const SnackBar(content: Text('Firma de autorización no válida.')),
       );
       return;
     }
@@ -105,7 +105,7 @@ class RealizarMantenimientoScreenState
       'limpiarram': _limpiarram,
       'firmasistemas': firmasistemasControler.text,
       'firmaencargpclap': firmaencargpclapController.text,
-      'observaciones':observacionesController,
+      'observaciones': observacionesController.text, // Cambiado aquí
     };
 
     try {
@@ -289,7 +289,7 @@ class RealizarMantenimientoScreenState
               ),
               DropdownButtonFormField<String>(
                 value: _limpiarram,
-                decoration: const InputDecoration(labelText: '¿Se realizo la memoria ram?'),
+                decoration: const InputDecoration(labelText: '¿Se limpio la ram?'),
                 items: ['Sí', 'No']
                     .map((label) => DropdownMenuItem(
                           child: Text(label),
@@ -302,87 +302,41 @@ class RealizarMantenimientoScreenState
                   });
                 },
               ),
-              const Divider(
-                color: Color.fromARGB(255, 75, 21, 85),
-                thickness: 2,
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: fechaController,
-                decoration: const InputDecoration(labelText: 'Fecha de inicio'),
-              ),
-              const Divider(
-                color: Color.fromARGB(255, 75, 21, 85),
-                thickness: 2,
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: semanaController,
-                decoration: const InputDecoration(labelText: 'Semana'),
-              ),
-              const Divider(
-                color: Color.fromARGB(255, 75, 21, 85),
-                thickness: 2,
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: encargadoequipoController,
-                decoration:
-                    const InputDecoration(labelText: 'Encargado de PC / Laptop'),
-              ),
-              const Divider(
-                color: Color.fromARGB(255, 75, 21, 85),
-                thickness: 2,
-              ),
-              const SizedBox(height: 16.0),
               TextFormField(
                 controller: areaControler,
                 decoration: const InputDecoration(labelText: 'Área'),
               ),
-              const Divider(
-                color: Color.fromARGB(255, 75, 21, 85),
-                thickness: 2,
-              ),
-              const SizedBox(height: 16.0),
               TextFormField(
-                controller: observacionesController,
-                decoration: const InputDecoration(labelText: 'Observaciones'),
+                controller: fechaController,
+                decoration: const InputDecoration(labelText: 'Fecha de inicio'),
               ),
-              const Divider(
-                color: Color.fromARGB(255, 75, 21, 85),
-                thickness: 2,
-              ),
-              const SizedBox(height: 16.0),
               TextFormField(
-                controller: firmasistemasControler,
-                decoration: const InputDecoration(labelText: 'Ingrese la firma SI'),
-                obscureText: true,
+                controller: semanaController,
+                decoration: const InputDecoration(labelText: 'Semana'),
               ),
-              const Divider(
-                color: Color.fromARGB(255, 75, 21, 85),
-                thickness: 2,
-              ),
-              const SizedBox(height: 16.0),
               TextFormField(
-                controller: firmaencargpclapController,
-                decoration: const InputDecoration(labelText: 'Ingrese la firma AU'),
-                obscureText: true,
+                controller: encargadoequipoController,
+                decoration: const InputDecoration(labelText: 'Encargado del equipo'),
               ),
-              const Divider(
-                color: Color.fromARGB(255, 75, 21, 85),
-                thickness: 2,
-              ),
-              const SizedBox(height: 16.0),
               TextFormField(
                 controller: fechaterminoController,
                 decoration: const InputDecoration(labelText: 'Fecha de termino'),
               ),
+              TextFormField(
+                controller: firmasistemasControler,
+                decoration: const InputDecoration(labelText: 'Firma SI'),
+              ),
+              TextFormField(
+                controller: firmaencargpclapController,
+                decoration: const InputDecoration(labelText: 'Firma AU'),
+              ),
+              TextFormField(
+                controller: observacionesController,
+                decoration: const InputDecoration(labelText: 'Observaciones'),
+              ),
+              const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    _guardarMantenimientos(); // Llamar a la función para guardar los datos
-                  }
-                },
+                onPressed: _guardarMantenimientos,
                 child: const Text('Guardar'),
               ),
             ],
