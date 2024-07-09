@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 5), // Espacio entre el AppBar y la imagen
             // Imagen
             Image.asset(
-              'assets/surmeti.png', // Ruta del logo
+              'assets/surmeti.png',
               height: 200, // Ajuste del tamaño de la imagen
             ),
             const SizedBox(height: 20), // Espacio entre la imagen y los campos de texto
@@ -120,7 +120,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             const SizedBox(height: 15), // Espacio entre los campos y el botón
 
-            // Botón de Iniciar sesión
             ElevatedButton(
               onPressed: _login,
               child: const Text('Iniciar'),

@@ -12,7 +12,7 @@ class NotificacionesScreen extends StatelessWidget {
         stream: FirebaseFirestore.instance.collection('alerta').snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());  
           }
           if (snapshot.hasError) {
             return const Center(child: Text('Error al cargar los datos'));
