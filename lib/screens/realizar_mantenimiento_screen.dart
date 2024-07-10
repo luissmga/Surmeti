@@ -167,6 +167,10 @@ class RealizarMantenimientoScreenState
                   });
                 },
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               DropdownButtonFormField<String>(
                 value: _borrartemporales,
                 decoration: const InputDecoration(labelText: '¿Se borraron archivos temporales?'),
@@ -182,6 +186,10 @@ class RealizarMantenimientoScreenState
                   });
                 },
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               DropdownButtonFormField<String>(
                 value: _vaciarpapelera,
                 decoration: const InputDecoration(labelText: '¿Se vacío la papelera?'),
@@ -197,6 +205,10 @@ class RealizarMantenimientoScreenState
                   });
                 },
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               DropdownButtonFormField<String>(
                 value: _quitarprograminicio,
                 decoration: const InputDecoration(labelText: '¿Se quitaron los programas que se ejecutan al inicio?'),
@@ -212,6 +224,10 @@ class RealizarMantenimientoScreenState
                   });
                 },
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               DropdownButtonFormField<String>(
                 value: _quitarservinicio,
                 decoration: const InputDecoration(labelText: '¿Se quitaron los servicios que se ejecutan al inicio?'),
@@ -227,6 +243,10 @@ class RealizarMantenimientoScreenState
                   });
                 },
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               DropdownButtonFormField<String>(
                 value: _escanearantivirus,
                 decoration: const InputDecoration(labelText: '¿Se escaneo con antivirus?'),
@@ -242,6 +262,10 @@ class RealizarMantenimientoScreenState
                   });
                 },
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               DropdownButtonFormField<String>(
                 value: _limpiarpc,
                 decoration: const InputDecoration(labelText: '¿Se limpio la pc?'),
@@ -257,6 +281,10 @@ class RealizarMantenimientoScreenState
                   });
                 },
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               DropdownButtonFormField<String>(
                 value: _cambiarpastermica,
                 decoration: const InputDecoration(labelText: '¿Se cambio la pasta térmica?'),
@@ -272,6 +300,10 @@ class RealizarMantenimientoScreenState
                   });
                 },
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               DropdownButtonFormField<String>(
                 value: _limpiarranuras,
                 decoration: const InputDecoration(labelText: '¿Se limpiaron las ranuras?'),
@@ -287,6 +319,10 @@ class RealizarMantenimientoScreenState
                   });
                 },
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               DropdownButtonFormField<String>(
                 value: _limpiarram,
                 decoration: const InputDecoration(labelText: '¿Se limpio la ram?'),
@@ -302,38 +338,74 @@ class RealizarMantenimientoScreenState
                   });
                 },
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               TextFormField(
                 controller: areaControler,
                 decoration: const InputDecoration(labelText: 'Área'),
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               TextFormField(
                 controller: fechaController,
                 decoration: const InputDecoration(labelText: 'Fecha de inicio'),
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               TextFormField(
                 controller: semanaController,
                 decoration: const InputDecoration(labelText: 'Semana'),
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               TextFormField(
                 controller: encargadoequipoController,
                 decoration: const InputDecoration(labelText: 'Encargado del equipo'),
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               TextFormField(
                 controller: fechaterminoController,
                 decoration: const InputDecoration(labelText: 'Fecha de termino'),
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               TextFormField(
                 controller: firmasistemasControler,
                 decoration: const InputDecoration(labelText: 'Firma SI'),
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               TextFormField(
                 controller: firmaencargpclapController,
                 decoration: const InputDecoration(labelText: 'Firma AU'),
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               TextFormField(
                 controller: observacionesController,
                 decoration: const InputDecoration(labelText: 'Observaciones'),
               ),
+            const Divider(
+              color: Color.fromARGB(255, 139, 0, 174),
+              thickness: 2,
+            ),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _guardarMantenimientos,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:surmeti/screens/notificaciones_screen.dart';
+import 'code_user_screen.dart'; // Asegúrate de importar la nueva pantalla
 import '../theme/app_theme.dart';
 import 'agregar_screen.dart';
 import 'editar_screen.dart';
@@ -89,6 +92,22 @@ class WelcomeScreen extends StatelessWidget {
                 buildBox(context, 'Notificaciones', const NotificacionesScreen()),
                 buildBox(context, 'Ayuda', const AyudaScreen()),
               ],
+            ),
+            const SizedBox(height: 20),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CodeUserScreen()),
+                );
+              },
+              child: const Text(
+                '...',
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.black,
+                ),
+              ),
             ),
           ],
         ),
