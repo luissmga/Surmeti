@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:surmeti/screens/notificaciones_screen.dart';
 import 'code_user_screen.dart'; // Asegúrate de importar la nueva pantalla
 import '../theme/app_theme.dart';
