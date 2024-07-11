@@ -16,6 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final passwordController = TextEditingController();
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+  // ignore: unused_field
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 

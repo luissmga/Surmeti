@@ -100,10 +100,9 @@ class WelcomeScreen extends StatelessWidget {
                 );
               },
               child: const Text(
-                '...',
+                '    ',//Boton invisible
                 style: TextStyle(
                   fontSize: 24,
-                  color: Colors.black,
                 ),
               ),
             ),

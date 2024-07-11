@@ -43,7 +43,7 @@ class _CodeUserScreenState extends State<CodeUserScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('New Administrative'),
+        title: const Text('Nuevo administrativo'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -60,21 +60,21 @@ class _CodeUserScreenState extends State<CodeUserScreen> {
             const SizedBox(height: 20),
               TextFormField(
                 controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Nombre'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a name';
+                    return 'Por favor ingrese un nombre';
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _codeController,
-                decoration: const InputDecoration(labelText: '6 digit code'),
+                decoration: const InputDecoration(labelText: 'Firma de 6 digitos'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.length != 6) {
-                    return 'The code must be 6 digits';
+                    return 'Ingrese firma de 6 digitos';
                   }
                   return null;
                 },
@@ -82,7 +82,7 @@ class _CodeUserScreenState extends State<CodeUserScreen> {
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _submitData,
-                child: const Text('Send'),
+                child: const Text('Enviar'),
               ),
             ],
           ),
