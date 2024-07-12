@@ -52,7 +52,7 @@ class WelcomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
           children: <Widget>[
             const Text(
               '¿Qué quieres hacer hoy?',

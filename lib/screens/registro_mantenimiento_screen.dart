@@ -68,7 +68,7 @@ class _RegistroMantenimientoScreenState
                       subtitle: Text('Fecha de mantenimiento: $fecha'),
                     );
                   } else {
-                    final String idAU = snapshot.data!;
+                    final String idAU = snapshot.data!;//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
                     return ListTile(
                       title: Text('$idAU'),
                       subtitle: Text('Fecha de mantenimiento: $fecha'),

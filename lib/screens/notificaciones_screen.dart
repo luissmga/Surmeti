@@ -31,7 +31,7 @@ class NotificacionesScreen extends StatelessWidget {
                       onPressed: () {
                         // Eliminar el documento de Firebase Firestore
                         doc.reference.delete();
-                      },
+                      },//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
                       child: const Text('Eliminar'),
                     ),
                   ),

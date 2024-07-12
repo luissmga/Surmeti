@@ -66,7 +66,7 @@ class _CodeUserScreenState extends State<CodeUserScreen> {
                     return 'Por favor ingrese un nombre';
                   }
                   return null;
-                },
+                },//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
               ),
               TextFormField(
                 controller: _codeController,

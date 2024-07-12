@@ -13,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(Duration(seconds: 3), () {
       Navigator.of(context).pushReplacementNamed('/login');
     });
-  }
+  }//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
 
   @override
   Widget build(BuildContext context) {

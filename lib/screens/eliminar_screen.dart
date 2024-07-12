@@ -16,7 +16,7 @@ class EliminarScreen extends StatelessWidget {
           }
           if (snapshot.hasError) {
             return const Center(child: Text('Error al cargar los datos'));
-          }
+          }//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return const Center(child: Text('No hay datos disponibles'));
           }

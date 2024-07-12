@@ -10,6 +10,7 @@ class AppTheme {
   static const Color primaryColor = Colors.blue;
   static const Color accentColor = Colors.blueAccent;
   static const Color boxColor = Colors.lightBlue;
+  static const Color dividerColor = Colors.purple;
 
   static const TextStyle appBarTextStyle = TextStyle(
     fontSize: 20,
@@ -21,6 +22,30 @@ class AppTheme {
     fontSize: 16,
     fontWeight: FontWeight.w500,
     color: Colors.white,
+  );
+
+  static const TextStyle bodyTextStyle = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+    color: Colors.black,
+  );
+
+  static const TextStyle labelTextStyle = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
+  );
+
+  static const TextStyle dropdownTextStyle = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.normal,
+    color: Colors.black,
+  );
+
+  static const TextStyle titleTextStyle = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: Colors.black,
   );
 
   static ThemeData get themeData {
@@ -47,11 +72,11 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white, 
-          backgroundColor: Colors.black, // Color del texto del botón
+          backgroundColor: Colors.black,
         ),
       ),
       dividerTheme: const DividerThemeData(
-        color: Colors.purple,
+        color: dividerColor,
         thickness: 1,
       ),
     );

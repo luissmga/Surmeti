@@ -30,7 +30,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final passwordController = TextEditingController();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
-
+//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
   @override
   void dispose() {
     // Libera los controladores cuando el widget se destruye

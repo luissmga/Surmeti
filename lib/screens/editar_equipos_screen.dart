@@ -62,7 +62,7 @@ class _EditarEquipoScreenState extends State<EditarEquipoScreen> {
     _tipoEquipo = widget.data['tipoEquipo'] ?? 'PC';
     _monitorExtra = widget.data['monitorExtra'] ?? 'No';
   }
-
+//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
   Future<void> _updateEquipo() async {
     final equipoData = {
       'tipoEquipo': _tipoEquipo,
@@ -193,8 +193,8 @@ class _EditarEquipoScreenState extends State<EditarEquipoScreen> {
               const Divider(
                 color: Color.fromARGB(255, 75, 21, 85),
                 thickness: 2,
-              ),
-              const SizedBox(height: 16.0),
+              ),//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
+              const SizedBox(height: 16.0),//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
               TextFormField(
                 controller: ramController,
                 decoration: const InputDecoration(labelText: 'RAM'),
@@ -287,7 +287,7 @@ class _EditarEquipoScreenState extends State<EditarEquipoScreen> {
                 controller: impresoraPredeterminadaController,
                 decoration: const InputDecoration(
                     labelText: 'Impresora Predeterminada'),
-              ),
+              ),//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
               const Divider(
                 color: Color.fromARGB(255, 75, 21, 85),
                 thickness: 2,

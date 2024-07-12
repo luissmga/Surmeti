@@ -6,10 +6,12 @@ import 'package:surmeti/screens/registro_mantenimiento_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
+//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
 class RealizarMantenimientoScreen extends StatefulWidget {
   const RealizarMantenimientoScreen({super.key});
 
@@ -51,7 +53,7 @@ class RealizarMantenimientoScreenState
   final TextEditingController fechaterminoController = TextEditingController();
   final TextEditingController firmasistemasControler = TextEditingController();
   final TextEditingController observacionesController = TextEditingController();
-  final TextEditingController firmaencargpclapController = TextEditingController();
+  final TextEditingController firmaencargpclapController = TextEditingController();//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
 
   @override
   void dispose() {
@@ -90,7 +92,7 @@ class RealizarMantenimientoScreenState
       'fecha': fechaController.text,
       'fechatermino': fechaterminoController.text,
       'semana': semanaController.text,
-      'encargadoequipo': encargadoequipoController.text,
+      'encargadoequipo': encargadoequipoController.text,//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
       'area': areaControler.text,
       'borrartemporales': _borrartemporales,
       'vaciarpapelera': _vaciarpapelera,
@@ -136,7 +138,7 @@ class RealizarMantenimientoScreenState
         SnackBar(content: Text('Error al guardar el mantenimiento: $e')),
       );
     }
-  }
+  }//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
 
   @override
   Widget build(BuildContext context) {
@@ -215,7 +217,7 @@ class RealizarMantenimientoScreenState
                           child: Text(label),
                           value: label,
                         ))
-                    .toList(),
+                    .toList(),//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
                 onChanged: (value) {
                   setState(() {
                     _quitarprograminicio = value!;
@@ -250,7 +252,7 @@ class RealizarMantenimientoScreenState
                 decoration: const InputDecoration(labelText: '¿Se escaneo con antivirus?'),
                 items: ['Sí', 'No']
                     .map((label) => DropdownMenuItem(
-                          child: Text(label),
+                          child: Text(label),//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
                           value: label,
                         ))
                     .toList(),
@@ -315,7 +317,7 @@ class RealizarMantenimientoScreenState
                   setState(() {
                     _limpiarranuras = value!;
                   });
-                },
+                },//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
               ),
             const Divider(
               color: Color.fromARGB(255, 139, 0, 174),
@@ -394,7 +396,7 @@ class RealizarMantenimientoScreenState
               ),
             const Divider(
               color: Color.fromARGB(255, 139, 0, 174),
-              thickness: 2,
+              thickness: 2,//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
             ),
               TextFormField(
                 controller: observacionesController,

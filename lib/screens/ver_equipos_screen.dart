@@ -37,7 +37,7 @@ class VerEquiposScreen extends StatelessWidget {
                           MaterialPageRoute(
                             builder: (context) => DetallesEquipoScreen(doc: doc),
                           ),
-                        );
+                        );//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
                       },
                       child: const Text('Ver'),
                     ),
@@ -119,7 +119,7 @@ class DetallesEquipoScreen extends StatelessWidget {
               children: <Widget>[
                 // buildBox(context, 'Agregar alerta',  AgregarAlertaScreen()),
                 // buildBox(context, 'Realizar mantenimiento',  RealizarMantenimientoScreen()),
-                buildBox(context, 'Realizar validación',  RealizarValidacionScreen()),
+                buildBox(context, 'Realizar validación',  RealizarValidacionScreen(doc: doc)),
               ],
             ),
             const SizedBox(height: 30),

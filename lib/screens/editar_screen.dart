@@ -23,7 +23,7 @@ class EditarScreen extends StatelessWidget {
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return const Center(child: Text('No hay datos disponibles'));
           }
-
+//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
           return ListView.separated(
             itemCount: snapshot.data!.docs.length,
             separatorBuilder: (context, index) => const Divider(

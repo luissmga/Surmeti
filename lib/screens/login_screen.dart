@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
-
+//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
   Future<void> _login() async {
     String username = usernameController.text;
     String password = passwordController.text;

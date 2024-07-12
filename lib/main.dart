@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:surmeti/firebase_options.dart';
@@ -36,8 +37,16 @@ class MyApp extends StatelessWidget {
         '/welcome': (context) => const WelcomeScreen(),
         '/ver_equipos': (context) => const VerEquiposScreen(),
         '/agregar_alerta': (context) => const AgregarAlertaScreen(),
-        '/realizar_mantenimiento': (context) => RealizarMantenimientoScreen(),
-        '/realizar_validacion': (context) => RealizarValidacionScreen(),
+        '/realizar_mantenimiento': (context) => const RealizarMantenimientoScreen(),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == '/realizar_validacion') {
+          final DocumentSnapshot doc = settings.arguments as DocumentSnapshot;//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
+          return MaterialPageRoute(
+            builder: (context) => RealizarValidacionScreen(doc: doc),
+          );
+        }
+        return null;
       },
     );
   }

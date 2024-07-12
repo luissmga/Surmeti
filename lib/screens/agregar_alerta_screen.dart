@@ -165,7 +165,7 @@ class _AgregarAlertaScreenState extends State<AgregarAlertaScreen> {
                 ),
                 trailing: IconButton(
                   icon: const Icon(Icons.calendar_today),
-                  onPressed: () => _selectDateTime(context),
+                  onPressed: () => _selectDateTime(context), //CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
                 ),
               ),
               const SizedBox(height: 16),

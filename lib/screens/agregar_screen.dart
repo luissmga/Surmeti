@@ -179,7 +179,7 @@ class _AgregarScreenState extends State<AgregarScreen> {
                 decoration: const InputDecoration(labelText: 'Responsable del equipo'),
               ),
               const Divider(
-                    color: Color.fromARGB(255, 75, 21, 85),
+                    color: Color.fromARGB(255, 75, 21, 85),//CODIGO POR LUIS RODOLFO SANCHEZ MUNGUÍA (LM)
                     thickness: 2,
                   ),
               const SizedBox(height: 16.0),
